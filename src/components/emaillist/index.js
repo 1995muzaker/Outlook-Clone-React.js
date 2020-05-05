@@ -12,6 +12,7 @@ class EmailList extends React.Component {
   componentDidMount() {
     this.loadList();
   }
+
   loadList = () => {
     fetch("https://flipkart-email-mock.now.sh/")
       .then((res) => {
@@ -25,11 +26,18 @@ class EmailList extends React.Component {
       });
   };
 
-  listId = (value) => {
-    console.log("ids", value);
-    this.setState({
-      stateId: value,
-    });
+  listId = (id) => {
+    console.log("inside id", id);
+    fetch(`https://flipkart-email-mock.now.sh/?id=${id}`)
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        console.log("details", data);
+        this.setState({
+          stateId: data,
+        });
+      });
   };
 
   render() {
@@ -69,13 +77,13 @@ class EmailList extends React.Component {
                       }).format(listData.date)}
                     </p>
                   </div>
-
                   {/* <EmailView id={this.state.id} /> */}
                 </div>
               );
             })}
           </div>
-          {this.state.stateId ? <EmailView  id={this.state.stateId } /> : null}
+          {this.state.stateId ? <EmailView id={this.state.stateId} /> : null}
+          <div></div>
         </div>
       </React.Fragment>
     );
