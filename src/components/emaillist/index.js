@@ -1,49 +1,59 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 // import axios from "axios";
 import "../../styles/emaillist.scss";
-import EmailView from "../emailview";
+// import EmailView from "../emailview";
 import Header from "../header";
+import { useSelector, useDispatch } from "react-redux";
+import { fetchEmail } from "../../actions/fetchEmail";
 
 const EmailList = () => {
-  const [emailList, emailValue] = useState([]);
-  const [stateId, stateValue] = useState(false);
+  // const [emailList, emailValue] = useState([]);
+  // const [stateId, stateValue] = useState(false);
+
+  const emailView = useSelector((state) => state.emailInfo);
+  const dispatch = useDispatch();
+
+  const getData = () => dispatch(fetchEmail);
 
   useEffect(() => {
-    loadList();
+    dispatch(getData());
   }, []);
 
-  const loadList = () => {
-    fetch("https://flipkart-email-mock.now.sh/")
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => {
-        console.log(data);
-        emailValue(data.list);
-      });
-  };
+  // const loadList = () => {
+  //   fetch("https://flipkart-email-mock.now.sh/")
+  //     .then((res) => {
+  //       return res.json();
+  //     })
+  //     .then((data) => {
+  //       console.log(data);
+  //       emailValue(data.list);
+  //     });
+  // };
 
-  const listId = (id) => {
-    console.log("inside id", id);
-    fetch(`https://flipkart-email-mock.now.sh/?id=${id}`)
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => {
-        console.log("details", data);
-        stateValue(data);
-      });
-  };
-
+  // const listId = (id) => {
+  //   console.log("inside id", id);
+  //   fetch(`https://flipkart-email-mock.now.sh/?id=${id}`)
+  //     .then((res) => {
+  //       return res.json();
+  //     })
+  //     .then((data) => {
+  //       console.log("details", data);
+  //       stateValue(data);
+  //     });
+  // };
+  console.log(emailView);
   return (
+    // <div onClick={() => getData(emailView.emailInfo)}>hello</div>
     <React.Fragment>
       <Header />
       <div className={"main-list"}>
-        <div className={stateId ? "card-div" : "new-list"}>
-          {emailList.map((listData) => {
+        <div
+        // className={stateId ? "card-div" : "new-list"}
+        >
+          {emailView.map((listData) => {
             return (
               <div
-                onClick={() => listId(listData.id)}
+                // onClick={() => listId(listData.id)}
                 className="list-card"
                 key={listData.id}
               >
@@ -76,7 +86,7 @@ const EmailList = () => {
             );
           })}
         </div>
-        {stateId ? <EmailView id={stateId} /> : null}
+        {/* {stateId ? <EmailView id={stateId} /> : null} */}
       </div>
     </React.Fragment>
   );

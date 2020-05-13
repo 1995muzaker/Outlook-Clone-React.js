@@ -1,6 +1,6 @@
-import React from 'react';
+import React from "react";
 // import './App.css';
-import Outlook from './components';
+import Outlook from "./components";
 
 function App() {
   return (
