@@ -6,7 +6,6 @@ const Outlook = () => {
   return (
     <React.Fragment>
       <EmailList />
-      {/* <EmailView /> */}
     </React.Fragment>
   );
 };
