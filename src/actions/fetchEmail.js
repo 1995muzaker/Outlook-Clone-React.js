@@ -10,11 +10,6 @@ export const fetchEmail = () => {
             type: "FETCH_EMAIL",
             emailInfo: data.list,
           });
-          // if (fromCreateEvent) {
-          //   dispatch({
-          //     type: types.CREATE_EVENT
-          //   });
-          // }
         }
       })
       .catch((err) => {

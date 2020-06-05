@@ -48,6 +48,22 @@
   border-radius: 5px;
   padding: 10px 20px;
   box-sizing: border-box;
+  cursor: pointer;
+}
+
+.active-card {
+  width: 97%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  background: #f2f2f2;
+  margin: auto;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  padding: 10px 20px;
+  box-sizing: border-box;
+  border: 1px solid #e54065;
+  cursor: pointer;
 }
 
 .avatar {

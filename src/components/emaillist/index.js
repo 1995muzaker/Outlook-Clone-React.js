@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "../../styles/emaillist.scss";
 import EmailView from "../emailview";
 import Header from "../header";
@@ -7,6 +7,7 @@ import { fetchEmail } from "../../actions/fetchEmail";
 import { fetchId } from "../../actions/fetchId";
 
 const EmailList = () => {
+  const [activeMail, setActiveMail] = useState(null);
   const emailView = useSelector((state) => state.emailInfo);
   const emailId = useSelector((state) => state.selectedId);
   const dispatch = useDispatch();
@@ -14,6 +15,10 @@ const EmailList = () => {
   const getData = () => dispatch(fetchEmail);
 
   const getId = (id) => dispatch(fetchId(id));
+
+  const handleActiveState = (id) => {
+    setActiveMail(id);
+  };
 
   useEffect(() => {
     dispatch(getData());
@@ -27,8 +32,13 @@ const EmailList = () => {
           {emailView.map((listData) => {
             return (
               <div
-                onClick={() => getId(listData.id)}
-                className="list-card"
+                onClick={() => {
+                  getId(listData.id);
+                  handleActiveState(listData.id);
+                }}
+                className={
+                  activeMail === listData.id ? "active-card" : "list-card"
+                }
                 key={listData.id}
               >
                 <div className="avatar">
