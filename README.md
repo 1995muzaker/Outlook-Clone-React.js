@@ -1,4 +1,4 @@
-# Outlook clone with rest api
+# Outlook Clone in Reactjs and Redux ⚛️
 
 ## Getting Started
 
